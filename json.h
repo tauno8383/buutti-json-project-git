@@ -62,6 +62,11 @@ public:
         } while (ojbectStr.length() != 0);
     }
 
+    /*
+    Analysoi tiedostosta tuodusta deserialisoidusta JSON objektista yksinkertaisen
+    objektin (yksinkertainen objekti voi sisältää numeroita, tekstiä, totuusarvoja ja listoja)
+    */
+
     int numbers() // how many int values
     {
         int n{0};
@@ -111,6 +116,12 @@ public:
         return n;
     }
 
+    /*
+    Lukee arvoja deserialisoidusta JSON objektista (lisätehtävänä nämä tulevat funktiot
+    voidaan refaktoroida hyödyntäen funktion overloadausta, mutta ensin on tarkoitus
+    tehdä alapuolen tavalla testaustehtäviä varten)
+    */
+
     int getNumberValue(std::string valueName) // -> Palauttaa arvon, jonka nimi on sama kuin valueName muuttujan
     {
         for (JsonData data : _datas)
@@ -143,6 +154,51 @@ public:
                 return data._value._p_object->getBooleanValue(valueName);
         }
         return false;
+    }
+
+    /*
+    2. Päivittää JSON tiedoston
+    Päivittää deserialisoidun objektin arvoja (lisätehtävänä nämä tulevat funktiot
+    voidaan refaktoroida hyödyntäen funktion overloadausta, mutta ensin on tarkoitus
+    tehdä alapuolen tavalla testaustehtäviä varten)
+    */
+
+    void setNumberValue(std::string valueName, int value) // -> Päivittää arvon, jonka nimi on sama kuin valueName muuttujan
+    {
+        Value v{value};
+        for (JsonData data : _datas)
+        {
+            if (data._name == valueName)
+                data._value = v;
+            else if (data._value._valueType == ValueType::object)
+                data._value._p_object->setNumberValue(valueName, value);
+        }
+    }
+    void setTextValue(std::string valueName, std::string value) // -> Päivittää arvon, jonka nimi on sama kuin valueName muuttujan
+    {
+        Value v{value};
+        for (JsonData data : _datas)
+        {
+            if (data._name == valueName)
+                data._value = v;
+            else if (data._value._valueType == ValueType::object)
+                data._value._p_object->setTextValue(valueName, value);
+        }
+    }
+    void setBooleanValue(std::string valueName, bool value) // -> Päivittää arvon, jonka nimi on sama kuin valueName muuttujan
+    {
+        Value v{value};
+        for (JsonData data : _datas)
+        {
+            if (data._name == valueName)
+                data._value = v;
+            else if (data._value._valueType == ValueType::object)
+                data._value._p_object->setBooleanValue(valueName, value);
+        }
+    }
+    void setList(std::string valueName, std::vector<Value> values) //-> Toteutustapa riippuu siitä, miten selvitetään listan tyyppi, mutta funktion tulee päivittää lista, jonka nimi on sama kuin valueName muuttujan
+    {
+        std::cout << "setList() not implemented!\n";
     }
 
 private:
@@ -251,8 +307,8 @@ private:
             //     arr.push_back(std::make_shared<Value>(value));
             // } while (arrStr.length() != 0);
             // return arr;
-            
-            // FOR THE SAKE OF SIMPLICITY WE INGNORE ARRAYS AT THIS POINT! Use just dymmy array.
+
+            // FOR THE SAKE OF SIMPLICITY WE INGNORE JSON ARRAYS/LISTS AT THIS POINT! Use just dymmy array.
             std::shared_ptr<Value> p_value0(new Value{});
             std::shared_ptr<Value> p_value1(new Value{});
             std::shared_ptr<Value> p_value2(new Value{});

@@ -28,9 +28,7 @@ int main()
 {
     std::cout << "-----------Json-------------" << std::endl;
 
-    std::string jsonStringObject = readFile("test_json.json");
-
-    // std::cout << jsonStringObject << std::endl;
+    std::string jsonStringObject = readFile("test_json2.json");
 
     JsonObject jo{jsonStringObject};
 
@@ -47,6 +45,9 @@ int main()
     std::cout << "firstName has value " << jo.getTextValue("firstName") << std::endl;
     std::cout << "important has value " << jo.getBooleanValue("important") << std::endl;
     std::cout << "relevancyCheck has value " << jo.getBooleanValue("relevancyCheck") << std::endl;
+    std::cout << "---------------------\n";
+    jo.setNumberValue("number33", 44);
+    std::cout << "number33 value is " << jo.getNumberValue("number33") << std::endl;
 
     return 0;
 }
