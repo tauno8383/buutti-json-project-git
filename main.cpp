@@ -49,9 +49,9 @@ int main()
     std::cout << "Changing the value for \"number33\"\n";
     jo.setNumberValue("number33", 44);
     std::cout << "number33 value is " << jo.getNumberValue("number33") << std::endl;
-    std::cout << "Changing the value for \"lastName\"\n";
-    jo.setTextValue("lastName", "Pekkarinen");
-    std::cout << "lastName value is " << jo.getTextValue("lastName") << std::endl;
+    std::cout << "Changing the value for \"city\"\n";
+    jo.setTextValue("city", "Tampere");
+    std::cout << "city value is " << jo.getTextValue("city") << std::endl;
     std::cout << "Changing the value for \"isAlive\"\n";
     jo.setBooleanValue("isAlive", false);
     std::cout << "isAlive value is " << jo.getBooleanValue("isAlive") << std::endl;

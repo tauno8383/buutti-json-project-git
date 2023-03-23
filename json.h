@@ -36,32 +36,6 @@ struct Value
     Value(std::vector<std::shared_ptr<Value>> values) : _values{values}, _valueType{ValueType::array} {}
     Value(std::shared_ptr<JsonObject> p_object) : _p_object{p_object}, _valueType{ValueType::object} {}
 
-    // void operator=(const Value &v)
-    // {
-    //     switch (v._valueType)
-    //     {
-    //     case ValueType::boolean:
-    //         _boolValue = v._boolValue;
-    //         break;
-    //     case ValueType::integer:
-    //         _intValue = v._intValue;
-    //         break;
-    //     case ValueType::string:
-    //         _stringValue = v._stringValue;
-    //         break;
-    //     case ValueType::array:
-    //         // NOT INPLEMENTED
-    //         break;
-    //     case ValueType::object:
-    //         _p_object = v._p_object;
-    //         break;
-    //     case ValueType::unknown:
-    //         // Do nothing
-    //         break;
-    //     default:
-    //         break;
-    //     }
-    // }
 };
 
 struct JsonData
@@ -193,7 +167,7 @@ public:
     void setNumberValue(std::string valueName, int value) // -> Päivittää arvon, jonka nimi on sama kuin valueName muuttujan
     {
         Value v{value};
-        for (JsonData& data : _datas)
+        for (JsonData &data : _datas)
         {
             if (data._name == valueName)
                 data._value = v;
@@ -204,7 +178,7 @@ public:
     void setTextValue(std::string valueName, std::string value) // -> Päivittää arvon, jonka nimi on sama kuin valueName muuttujan
     {
         Value v{value};
-        for (JsonData& data : _datas)
+        for (JsonData &data : _datas)
         {
             if (data._name == valueName)
                 data._value = v;
@@ -215,7 +189,7 @@ public:
     void setBooleanValue(std::string valueName, bool value) // -> Päivittää arvon, jonka nimi on sama kuin valueName muuttujan
     {
         Value v{value};
-        for (JsonData& data : _datas)
+        for (JsonData &data : _datas)
         {
             if (data._name == valueName)
                 data._value = v;
@@ -226,6 +200,15 @@ public:
     void setList(std::string valueName, std::vector<Value> values) //-> Toteutustapa riippuu siitä, miten selvitetään listan tyyppi, mutta funktion tulee päivittää lista, jonka nimi on sama kuin valueName muuttujan
     {
         std::cout << "setList() not implemented!\n";
+    }
+
+    /*
+    Kirjoittaa päivitetyn deserialisoidun objektin JSON tiedostoon
+    */
+
+    bool writeFile() // -> Kirjoittaa alkuperäiseen tiedostoon päivitetyn objektin, josta JSON objekti on luettu.
+    {
+        return false;
     }
 
 private:
